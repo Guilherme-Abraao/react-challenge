@@ -5,7 +5,7 @@ import searchIcon from '../assets/search.svg';
 
 const PokemonListSearch: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState('');
-    const [isFocused, setIsFocused] = useState(false); 
+    const [isFocused, setIsFocused] = useState(false);
     const { data, isLoading, isError } = usePokemonList();
 
     const filteredPokemon = data?.filter((pokemon) =>
@@ -25,32 +25,32 @@ const PokemonListSearch: React.FC = () => {
     }
 
     const handleClick = () => {
-        setIsFocused(true); 
+        setIsFocused(true);
     };
 
     const handleBlur = () => {
-        setIsFocused(false); 
+        setIsFocused(false);
     };
 
     const handleSearchClick = () => {
-        setIsFocused(true); 
-      };
+        setIsFocused(true);
+    };
 
     return (
-        <div className="flex flex-col pt-20 items-center min-h-screen bg-gray-200">
+        <div className="flex flex-col pt-20 items-center min-h-screen w-full bg-gray-200">
 
-            <div className="sticky top-0 z-10 bg-gray-200 w-full flex justify-center p-2">
+            <div className="sticky top-0 z-10 bg-gray-200 flex justify-center p-2">
 
-                <div className="relative w-96">
+                <div className="relative ">
 
                     <input
                         type="text"
                         placeholder="Pesquise Pokémon..."
                         value={searchTerm}
                         onChange={handleSearch}
-                        onClick={handleClick} 
-                        onBlur={handleBlur} 
-                        className="mb-4 p-2 w-96 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
+                        onClick={handleClick}
+                        onBlur={handleBlur}
+                        className="mb-4 p-2 w-[500px] border border-gray-400 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
                     />
 
                     {(!searchTerm && !isFocused) && (
@@ -59,7 +59,7 @@ const PokemonListSearch: React.FC = () => {
                             src={searchIcon}
                             alt="search"
                             className="absolute right-2 top-5 transform -translate-y-1/2 w-6 h-6 cursor-pointer"
-                            onClick={handleSearchClick} 
+                            onClick={handleSearchClick}
                         />
 
                     )}
@@ -73,7 +73,7 @@ const PokemonListSearch: React.FC = () => {
                 {filteredPokemon?.map((pokemon) => (
 
                     <PokemonListItem key={pokemon.name} name={pokemon.name} url={pokemon.url} />
-                    
+
                 ))}
 
             </ul>
