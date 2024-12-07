@@ -6,17 +6,28 @@ type Pokemon = {
   url: string;
 };
 
-export const usePokemonList = () => {
+export const usePokemonList = (searchTerm: string = '') => {
 
   return useQuery<Pokemon[]>({
 
-    queryKey: ['pokemonList'],
+    queryKey: ['pokemonList', searchTerm],
 
     queryFn: async () => {
 
       const { data } = await api.get('/pokemon?limit=50');
-      return data.results;
-      
+
+      const results = data.results as Pokemon[];
+
+      return searchTerm
+
+        ? results.filter((pokemon) =>
+
+            pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+
+          )
+
+        : results;
+        
     },
 
   });

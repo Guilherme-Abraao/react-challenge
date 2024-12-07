@@ -14,9 +14,10 @@ const PokemonList: React.FC = () => {
   }
 
   return (
+    
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-200">
 
-      <ul className="space-y-4">
+      <ul>
 
       {data.map((pokemon) => (
 
@@ -27,7 +28,9 @@ const PokemonList: React.FC = () => {
       </ul>
 
     </div>
+
   );
+
 };
 
 export default PokemonList;
