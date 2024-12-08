@@ -18,6 +18,7 @@ const PokemonListItem: React.FC<PokemonListItemProps> = ({ name, url }) => {
     const backgroundColor = colors[colorIndex];
 
     return (
+      
       <li className="flex items-center p-4 mx-auto m-2 bg-gray-100 rounded-lg shadow-md w-full">
         
         <div
