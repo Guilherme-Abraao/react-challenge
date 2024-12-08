@@ -7,7 +7,7 @@ const PokemonHome: React.FC = () => {
 
       <header className="text-center py-6 bg-blue-600 text-white">
 
-        <h1 className="text-3xl font-bold">Pokédex</h1>
+        <h1 className="text-3xl font-bold">Pokedex</h1>
 
       </header>
 

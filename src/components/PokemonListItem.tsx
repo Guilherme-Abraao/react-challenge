@@ -51,12 +51,12 @@ const PokemonListItem: React.FC<PokemonListItemProps> = ({ name, url }) => {
 
   return (
 
-    <li className="flex items-center p-4 mx-auto m-2 bg-gray-100 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 hover:bg-gray-200 max-w-lg w-full">
+    <li className="flex items-center p-4 mx-auto m-2 bg-gray-100 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 hover:bg-gray-300 max-w-lg w-full">
       
       <img
         src={data.sprites.front_default}
         alt={name}
-        className="w-16 h-16 rounded-full bg-slate-300 mr-4 duration-300 hover:bg-lime-950"
+        className="w-16 h-16 border-2 border-zinc-400 rounded-full bg-slate-200 mr-4 duration-300"
       />
 
       <div className="flex flex-col justify-between">
@@ -78,7 +78,7 @@ const PokemonListItem: React.FC<PokemonListItemProps> = ({ name, url }) => {
             </span>
 
           ))}
-          
+
         </div>
 
       </div>
