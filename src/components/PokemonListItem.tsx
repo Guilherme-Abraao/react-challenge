@@ -9,24 +9,40 @@ type PokemonListItemProps = {
 const PokemonListItem: React.FC<PokemonListItemProps> = ({ name, url }) => {
   const { data, isLoading, isError } = usePokemonDetails(url);
 
-  if (isLoading) {
+  if (isLoading || isError || !data) {
+
+    const colors = ['bg-red-400', 'bg-green-400', 'bg-blue-400', 'bg-yellow-400', 'bg-purple-400', 'bg-pink-400'];
+
+    const colorIndex = name.charCodeAt(0) % colors.length;
+
+    const backgroundColor = colors[colorIndex];
 
     return (
+      <li className="flex items-center p-4 mx-auto m-2 bg-gray-100 rounded-lg shadow-md max-w-lg w-full">
+        
+        <div
+          className={`w-16 h-16 flex items-center justify-center rounded-full text-white text-lg font-bold ${backgroundColor} mr-4`}
+        >
 
-      <li className="flex items-center justify-center p-4 m-16 bg-gray-100 rounded-lg shadow-md">
-        Carregando...
-      </li>
+          {name
+            .split(/[ -]/)
+            .slice(0, 2)
+            .map((word) => word[0]?.toUpperCase())
+            .join('')}
 
-    );
+        </div>
 
-  }
+        <p className="text-lg font-bold text-stone-800 capitalize">
 
-  if (isError || !data) {
+          {name
+            .split(/[ -]/)
+            .slice(0, 2)
+            .map((word) => word[0]?.toUpperCase())
+            .join('')}
+          ...
 
-    return (
+        </p>
 
-      <li className="flex items-center justify-center p-4 m-2 bg-gray-100 rounded-lg shadow-md">
-        Erro ao carregar imagem
       </li>
 
     );
@@ -35,8 +51,8 @@ const PokemonListItem: React.FC<PokemonListItemProps> = ({ name, url }) => {
 
   return (
 
-    <li className="flex items-center p-4 mr-96 ml-96 m-2 bg-gray-100 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 hover:bg-gray-200 min-w-[500px]">
-
+    <li className="flex items-center p-4 mx-auto m-2 bg-gray-100 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 hover:bg-gray-200 max-w-lg w-full">
+      
       <img
         src={data.sprites.front_default}
         alt={name}
@@ -48,9 +64,9 @@ const PokemonListItem: React.FC<PokemonListItemProps> = ({ name, url }) => {
         <p className="text-lg font-bold text-stone-800 capitalize">{name}</p>
 
         <div className="flex flex-wrap gap-2">
-
+          
           {data.abilities.map((ability, index) => (
-
+            
             <span
               key={index}
               className={`px-3 py-1 rounded-full text-sm font-semibold mt-3
@@ -62,7 +78,7 @@ const PokemonListItem: React.FC<PokemonListItemProps> = ({ name, url }) => {
             </span>
 
           ))}
-
+          
         </div>
 
       </div>
