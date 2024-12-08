@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { usePokemonList } from '../hooks/usePokemonList';
 import PokemonListItem from './PokemonListItem';
 import searchIcon from '../assets/search.svg';
@@ -6,7 +6,10 @@ import searchIcon from '../assets/search.svg';
 const PokemonListSearch: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [isFocused, setIsFocused] = useState(false);
-    const { data } = usePokemonList();
+    const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
+    const { data, isLoading, isError } = usePokemonList();
+
+    const listRef = useRef<HTMLUListElement>(null);
 
     const filteredPokemon = data?.filter((pokemon) =>
         pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -16,32 +19,81 @@ const PokemonListSearch: React.FC = () => {
         setSearchTerm(event.target.value);
     };
 
-    const handleClick = () => {
-        setIsFocused(true);
+    const handleMouseEnter = (index: number) => {
+        setFocusedIndex(index);
     };
 
-    const handleBlur = () => {
-        setIsFocused(false);
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLUListElement>) => {
+
+        if (!filteredPokemon || filteredPokemon.length === 0) return;
+
+        if (event.key === 'ArrowDown') {
+
+            setFocusedIndex((prev) =>
+                prev === null || prev === filteredPokemon.length - 1 ? 0 : prev + 1
+            );
+
+        }
+
+        if (event.key === 'ArrowUp') {
+
+            setFocusedIndex((prev) =>
+                prev === null || prev === 0 ? filteredPokemon.length - 1 : prev - 1
+            );
+
+        }
+
+        if (event.key === 'Enter' && focusedIndex !== null) {
+
+            const selectedPokemon = filteredPokemon[focusedIndex];
+
+            alert(`Selecionado: ${selectedPokemon.name}`);
+
+        }
     };
 
-    const handleSearchClick = () => {
-        setIsFocused(true);
-    };
+    useEffect(() => {
+
+        if (focusedIndex !== null && listRef.current) {
+
+            const items = listRef.current.querySelectorAll('li');
+
+            if (items[focusedIndex]) {
+
+                (items[focusedIndex] as HTMLElement).focus();
+
+            }
+
+        }
+
+    }, [focusedIndex]);
+
+    if (isLoading) {
+        return <div className="text-center mt-10">Carregando...</div>;
+    }
+
+    if (isError || !data) {
+        return <div className="text-center mt-10">Erro ao carregar Pokémon.</div>;
+    }
 
     return (
-        <div className="flex flex-col pt-20 items-center min-h-screen w-full bg-gray-200">
-      
-            <div className="sticky top-0 z-10 bg-gray-200 flex justify-center w-8/12">
+        <div className="flex flex-col pt-8 items-center min-h-screen w-full bg-gray-200">
 
-                <div className="relative w-full px-4">
+            <p className="text-3xl text-center text-gray-600 my-4">
+                Bem-vindo(a) à Pokedex!
+            </p>
+
+            <div className="sticky top-0 z-10 bg-gray-200 flex justify-center p-4 w-full">
+
+                <div className="relative w-full max-w-2xl px-4">
 
                     <input
                         type="text"
                         placeholder="Pesquise Pokémon..."
                         value={searchTerm}
                         onChange={handleSearch}
-                        onClick={handleClick}
-                        onBlur={handleBlur}
+                        onClick={() => setIsFocused(true)}
+                        onBlur={() => setIsFocused(false)}
                         className="mb-4 p-3 w-full border border-gray-400 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
                     />
 
@@ -50,8 +102,8 @@ const PokemonListSearch: React.FC = () => {
                         <img
                             src={searchIcon}
                             alt="search"
-                            className="absolute right-8 top-7 transform -translate-y-1/2 w-6 h-6 cursor-pointer"
-                            onClick={handleSearchClick}
+                            className="absolute right-6 top-7 transform -translate-y-1/2 w-6 h-6 cursor-pointer"
+                            onClick={() => setIsFocused(true)}
                         />
 
                     )}
@@ -60,18 +112,34 @@ const PokemonListSearch: React.FC = () => {
 
             </div>
 
-            <ul className="space-y-4 mt-8 px-4 w-full max-w-2xl">
+            <ul
+                ref={listRef}
+                className="space-y-4 mt-4 px-4 w-full max-w-2xl"
+                onKeyDown={handleKeyDown}
+                tabIndex={0}
+            >
 
-                {filteredPokemon?.map((pokemon) => (
-                    
-                    <PokemonListItem key={pokemon.name} name={pokemon.name} url={pokemon.url} />
+                {filteredPokemon?.map((pokemon, index) => (
+
+                    <li
+                        key={pokemon.name}
+                        onMouseEnter={() => handleMouseEnter(index)}
+                        className={`rounded-lg shadow-md hover:bg-gray-200 cursor-point`}
+                        tabIndex={-1}
+                    >
+
+                        <PokemonListItem name={pokemon.name} url={pokemon.url} />
+
+                    </li>
 
                 ))}
 
             </ul>
 
         </div>
+
     );
+
 };
 
 export default PokemonListSearch;

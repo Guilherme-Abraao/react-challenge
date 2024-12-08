@@ -18,7 +18,7 @@ const PokemonListItem: React.FC<PokemonListItemProps> = ({ name, url }) => {
     const backgroundColor = colors[colorIndex];
 
     return (
-      <li className="flex items-center p-4 mx-auto m-2 bg-gray-100 rounded-lg shadow-md max-w-lg w-full">
+      <li className="flex items-center p-4 mx-auto m-2 bg-gray-100 rounded-lg shadow-md w-full">
         
         <div
           className={`w-16 h-16 flex items-center justify-center rounded-full text-white text-lg font-bold ${backgroundColor} mr-4`}
@@ -51,7 +51,7 @@ const PokemonListItem: React.FC<PokemonListItemProps> = ({ name, url }) => {
 
   return (
 
-    <li className="flex items-center p-4 mx-auto m-2 bg-gray-100 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 hover:bg-gray-300 max-w-lg w-full">
+    <li className="flex items-center p-4 mx-auto bg-gray-100 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 hover:bg-gray-300  w-full">
       
       <img
         src={data.sprites.front_default}

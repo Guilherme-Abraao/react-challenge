@@ -14,7 +14,7 @@ export const usePokemonList = (searchTerm: string = '') => {
 
     queryFn: async () => {
 
-      const { data } = await api.get('/pokemon?limit=100');
+      const { data } = await api.get('/pokemon?limit=800');
 
       const results = data.results as Pokemon[];
 
