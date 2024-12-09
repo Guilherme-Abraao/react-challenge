@@ -52,7 +52,7 @@ const PokemonListItem: React.FC<PokemonListItemProps> = ({ name, url }) => {
 
   return (
 
-    <li className="flex items-center p-4 mx-auto bg-gray-100 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 hover:bg-gray-300  w-full">
+    <li className="flex items-center p-4 mx-auto bg-gray-100 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 w-full">
       
       <img
         src={data.sprites.front_default}
