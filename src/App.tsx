@@ -1,21 +1,47 @@
+import PokemonFullScreenMessage from './components/PokemonFullScreenMessage';
 import { usePokemonList } from './hooks/usePokemonList';
 import PokemonHome from './pages/PokemonHome';
 
 const App = () => {
   const { data, isLoading, error } = usePokemonList();
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) {
 
-  if (error) return <p>Something went wrong: {error.message}</p>;
+    return (
 
-  if (!data) return <p>No Pokémon data available.</p>;
+        <PokemonFullScreenMessage
+            message="Carregando..."
+            backgroundColor="bg-red-600"
+        />
+
+    );
+
+  }
+
+  if (error || !data) {
+
+    return (
+
+        <PokemonFullScreenMessage
+            message="Erro ao carregar Pokémon." 
+            backgroundColor="bg-red-600"
+        />
+
+    );
+
+  } 
+
 
   return (
+
     <div>
+
       <PokemonHome />
+      
     </div>
 
   );
+
 };
 
 export default App;
