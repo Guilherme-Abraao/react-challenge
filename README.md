@@ -7,7 +7,29 @@ O projeto utiliza **React** para a interface de usuário, **Tailwind CSS** para 
 
 ## 🏗️ Arquitetura do Projeto
 
-O projeto segue uma arquitetura baseada em **componentes funcionais**, organizados de forma modular. Principais componentes:
+O projeto segue uma arquitetura baseada em **componentes funcionais**, organizados de forma modular. 
+
+### 📚 Estrutura de Pastas
+
+    src/
+
+        assets/ 
+            # Arquivos de imagens e ícones
+
+        components/ 
+            # Componenes reutilizáveis
+
+        pages/
+            # Páginas da aplicação
+
+        services/
+            # API da pokeapi
+
+        hooks/
+            # Hooks customiados
+
+### 📦 Principais Componentes
+
 
 1. **`PokemonListSearch`**: Componente responsável pela barra de pesquisa, permitindo ao usuário buscar Pokémons por nome.
 2. **`PokemonList`**: Componente que exibe a lista de Pokémons filtrada com base na pesquisa.
@@ -43,7 +65,7 @@ O projeto segue uma arquitetura baseada em **componentes funcionais**, organizad
 4. **Acesse o aplicativo a aplicação**
 
     ```bash
-    O projeto estará disponível em: http://localhost:3000
+    O projeto estará disponível em: http://127.0.0.1:5173/
 
 ---
 
