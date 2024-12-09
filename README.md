@@ -49,13 +49,13 @@ O projeto segue uma arquitetura baseada em **componentes funcionais**, organizad
 1. **Clone o repositório**
 
    ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
+   git clone https://github.com/Guilherme-Abraao/react-challenge
    cd seu-repositorio
 
 2. **Instale as dependências**
 
     ```bash
-    npm install
+    composer install
 
 3. **Inicie o servidor de desenvolvimento**
 
