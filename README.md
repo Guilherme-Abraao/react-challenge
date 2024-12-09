@@ -38,7 +38,7 @@ O projeto segue uma arquitetura baseada em **componentes funcionais**, organizad
 3. **Inicie o servidor de desenvolvimento**
 
     ```bash
-    npm start
+    npm run dev
 
 4. **Acesse o aplicativo a aplicação**
 
